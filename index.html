@@ -111,7 +111,7 @@ a:hover{color:#0f2d72}
       </div>
     </div>
 
-    <div onClick="{{ openSheet }}" style="margin:18px 0 28px;background:#fceb2e;color:#04142f;text-align:center;padding:14px;border-radius:8px;font:700 14px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#eadb00">Escolher meus sabores →</div>
+    <div id="bottom-cta" onClick="{{ openSheet }}" style="margin:18px 0 28px;background:#fceb2e;color:#04142f;text-align:center;padding:14px;border-radius:8px;font:700 14px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#eadb00">Escolher meus sabores →</div>
 
     <div style="border-top:1px solid rgba(4,20,47,.15)"></div>
     <div style="margin-top:20px;background:#f2f2f2;border-radius:10px;padding:14px;display:flex;align-items:center;gap:12px">
@@ -306,16 +306,19 @@ const FAQ_DOT = [
 
 class Component extends DCLogic {
   state = { sheetOpen: false, pick1: null, pick2: null, editingStage: null, resgatado: false, addedToCart: false,
-    freebies: { pouch3: true, mousepad: true, keyboard: true, shipping: true }, openFaq: {}, tableOpen: false, promoOpen: false, carouselTick: 0, stickyVisible: false };
+    freebies: { pouch3: true, mousepad: true, keyboard: true, shipping: true }, openFaq: {}, tableOpen: false, promoOpen: false, carouselTick: 0, stickyVisible: true };
 
   componentDidMount() {
     this._prizeInterval = setInterval(() => this.setState(s => ({ carouselTick: s.carouselTick + 1 })), 2600);
-    this._onScroll = () => this.setState({ stickyVisible: window.scrollY > 300 });
-    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._observer = new IntersectionObserver(([e]) => {
+      this.setState({ stickyVisible: !e.isIntersecting });
+    }, { threshold: 0 });
+    const bottomCta = document.getElementById('bottom-cta');
+    if (bottomCta) this._observer.observe(bottomCta);
   }
   componentWillUnmount() {
     clearInterval(this._prizeInterval);
-    window.removeEventListener('scroll', this._onScroll);
+    if (this._observer) this._observer.disconnect();
   }
 
   openSheet = () => { document.body.style.overflow = 'hidden'; this.setState({ sheetOpen: true }); };
