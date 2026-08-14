@@ -83,8 +83,6 @@ a:hover{color:#0f2d72}
       </div>
     </div>
 
-    <div onClick="{{ openSheet }}" style="margin-top:16px;background:#fceb2e;color:#04142f;text-align:center;padding:14px;border-radius:8px;font:700 14px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#eadb00">Escolher meus sabores →</div>
-
     <div style="margin-top:22px;display:flex;align-items:center;gap:10px">
       <div style="flex:1;height:1px;background:rgba(4,20,47,.15)"></div>
       <span style="font:700 11px 'Inter Italic','Space Grotesk',sans-serif;color:#000;letter-spacing:1px;white-space:nowrap">GARANTA ITENS EXCLUSIVOS</span>
@@ -154,6 +152,12 @@ a:hover{color:#0f2d72}
     </div>
 
   </div>
+
+  <sc-if value="{{ stickyVisible }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;padding:10px 16px 20px;background:linear-gradient(transparent,#fff 30%);pointer-events:none;z-index:50">
+      <div onClick="{{ openSheet }}" style="background:#fceb2e;color:#04142f;text-align:center;padding:14px;border-radius:8px;font:700 14px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer;pointer-events:all;box-shadow:0 4px 16px rgba(4,20,47,.2)" style-hover="background:#eadb00">Escolher meus sabores →</div>
+    </div>
+  </sc-if>
 
   <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeSheet }}" style="position:fixed;inset:0;background:rgba(4,20,47,.5)"></div>
@@ -302,13 +306,16 @@ const FAQ_DOT = [
 
 class Component extends DCLogic {
   state = { sheetOpen: false, pick1: null, pick2: null, editingStage: null, resgatado: false, addedToCart: false,
-    freebies: { pouch3: true, mousepad: true, keyboard: true, shipping: true }, openFaq: {}, tableOpen: false, promoOpen: false, carouselTick: 0 };
+    freebies: { pouch3: true, mousepad: true, keyboard: true, shipping: true }, openFaq: {}, tableOpen: false, promoOpen: false, carouselTick: 0, stickyVisible: false };
 
   componentDidMount() {
     this._prizeInterval = setInterval(() => this.setState(s => ({ carouselTick: s.carouselTick + 1 })), 2600);
+    this._onScroll = () => this.setState({ stickyVisible: window.scrollY > 300 });
+    window.addEventListener('scroll', this._onScroll, { passive: true });
   }
   componentWillUnmount() {
     clearInterval(this._prizeInterval);
+    window.removeEventListener('scroll', this._onScroll);
   }
 
   openSheet = () => { document.body.style.overflow = 'hidden'; this.setState({ sheetOpen: true }); };
@@ -324,7 +331,7 @@ class Component extends DCLogic {
   togglePromo = () => this.setState(s => ({ promoOpen: !s.promoOpen }));
 
   renderVals() {
-    const { sheetOpen, pick1, pick2, editingStage, resgatado, addedToCart, freebies, openFaq, tableOpen, promoOpen, carouselTick } = this.state;
+    const { sheetOpen, pick1, pick2, editingStage, resgatado, addedToCart, freebies, openFaq, tableOpen, promoOpen, carouselTick, stickyVisible } = this.state;
     const naturalStage = pick1 == null ? 1 : pick2 == null ? 2 : 3;
     const stage = editingStage || naturalStage;
     const pick1Img = (FLAVORS.find(f => f.name === pick1) || {}).img;
@@ -414,6 +421,7 @@ class Component extends DCLogic {
       togglePromo: this.togglePromo,
       promoOpen,
       promoClosed: !promoOpen,
+      stickyVisible: stickyVisible && !sheetOpen,
     };
   }
 }
