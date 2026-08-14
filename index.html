@@ -309,8 +309,8 @@ class Component extends DCLogic {
     clearInterval(this._prizeInterval);
   }
 
-  openSheet = () => this.setState({ sheetOpen: true });
-  closeSheet = () => this.setState({ sheetOpen: false });
+  openSheet = () => { document.body.style.overflow = 'hidden'; this.setState({ sheetOpen: true }); };
+  closeSheet = () => { document.body.style.overflow = ''; this.setState({ sheetOpen: false }); };
   reopenStage1 = () => this.setState({ editingStage: 1, resgatado: false });
   reopenStage2 = () => this.setState({ editingStage: 2, resgatado: false });
   reopenStage3 = () => this.setState({ editingStage: 3, resgatado: false });
