@@ -155,7 +155,7 @@ a:hover{color:#0f2d72}
 
   <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeSheet }}" style="position:fixed;inset:0;background:rgba(4,20,47,.5)"></div>
-    <div style="position:fixed;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;height:80vh;background:#ffffff;border-top:2px solid #04142f;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding:10px 16px 16px;box-shadow:0 -6px 0 rgba(4,20,47,.1);overflow-y:auto">
+    <div style="position:fixed;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;max-height:80vh;background:#ffffff;border-top:2px solid #04142f;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding:10px 16px 16px;box-shadow:0 -6px 0 rgba(4,20,47,.1);overflow-y:auto">
       <div onClick="{{ closeSheet }}" style="width:40px;height:4px;background:rgba(4,20,47,.25);border-radius:2px;margin:0 auto 10px;cursor:pointer"></div>
       <div style="font:700 15px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f;text-align:center;margin-bottom:10px">{{ sheetTitle }}</div>
 
@@ -259,7 +259,7 @@ a:hover{color:#0f2d72}
           </div>
         </div>
 
-        <div style="min-height:8px"></div>
+        <div style="min-height:0"></div>
 
         <sc-if value="{{ showUnlockBar }}" hint-placeholder-val="{{ true }}">
           <div style="margin-top:0;border:2px solid #04142f;border-radius:10px;background:#f0f3fb;padding:14px;display:flex;align-items:center;gap:12px">
