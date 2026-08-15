@@ -303,8 +303,8 @@ class Component extends DCLogic {
   reopenStage1 = () => this.setState({ editingStage: 1, resgatado: false });
   reopenStage2 = () => this.setState({ editingStage: 2, resgatado: false });
   reopenStage3 = () => this.setState({ editingStage: 3, resgatado: false });
-  resgatar = () => this.setState({ resgatado: true });
-  addToCart = () => this.setState({ sheetOpen: false, addedToCart: true });
+  resgatar = () => { window.location.href = 'https://minhadot.com'; };
+  addToCart = () => { window.location.href = 'https://minhadot.com'; };
   toggleFreebie = (key) => this.setState(s => ({ freebies: { ...s.freebies, [key]: !s.freebies[key] } }));
   toggleFaq = (id) => this.setState(s => ({ openFaq: { ...s.openFaq, [id]: !s.openFaq[id] } }));
   toggleTable = () => this.setState(s => ({ tableOpen: !s.tableOpen }));
