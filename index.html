@@ -240,12 +240,13 @@ a:hover{color:#0f2d72}
                       </div>
                     </sc-if>
                     <sc-if value="{{ fb.unselected }}" hint-placeholder-val="{{ false }}">
-                      <div onClick="{{ fb.onClick }}" style="position:relative;border-radius:12px;border:2px dashed rgba(252,235,46,.45);background:rgba(252,235,46,.06);padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;opacity:.6" style-hover="opacity:.85">
-                        <div style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:transparent;border:2px solid #fceb2e;display:flex;align-items:center;justify-content:center">
-                          <div style="width:8px;height:8px;position:relative"><div style="position:absolute;left:0;right:0;top:50%;height:1.5px;background:#fceb2e;transform:translateY(-50%)"></div><div style="position:absolute;top:0;bottom:0;left:50%;width:1.5px;background:#fceb2e;transform:translateX(-50%)"></div></div>
+                      <div onClick="{{ fb.onClick }}" style="position:relative;border-radius:12px;border:2px dashed rgba(225,29,46,.4);background:rgba(225,29,46,.05);padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;overflow:hidden" style-hover="opacity:.85">
+                        <div style="width:100%;aspect-ratio:1;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;opacity:.3"><img src="{{ fb.img }}" alt="{{ fb.label }}" style="{{ fb.imgStyle }}"></div>
+                        <div style="font:600 10.5px 'Inter Italic','Space Grotesk',sans-serif;color:#e11d2e;text-decoration:line-through;text-align:center;line-height:1.15">{{ fb.label }}</div>
+                        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none">
+                          <div style="position:absolute;top:0;bottom:0;left:50%;width:4px;background:#e11d2e;transform:translateX(-50%);opacity:.25"></div>
+                          <div style="writing-mode:vertical-rl;transform:rotate(180deg);font:900 10px 'Space Grotesk',sans-serif;color:#e11d2e;white-space:nowrap;letter-spacing:1px">NÃO QUERO GANHAR</div>
                         </div>
-                        <div style="width:100%;aspect-ratio:1;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;opacity:.5"><img src="{{ fb.img }}" alt="{{ fb.label }}" style="{{ fb.imgStyle }}"></div>
-                        <div style="font:600 10.5px 'Inter Italic','Space Grotesk',sans-serif;color:#ff6b6b;text-decoration:line-through;text-align:center;line-height:1.15">{{ fb.label }}</div>
                       </div>
                     </sc-if>
                   </sc-for>
