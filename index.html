@@ -169,7 +169,7 @@ a:hover{color:#0f2d72}
     <div onClick="{{ closeSheet }}" style="position:fixed;inset:0;background:rgba(4,20,47,.5)"></div>
     <div style="position:fixed;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;max-height:80vh;background:#ffffff;border-top:2px solid #04142f;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding:10px 16px 16px;box-shadow:0 -6px 0 rgba(4,20,47,.1);overflow-y:auto">
       <div onClick="{{ closeSheet }}" style="width:40px;height:4px;background:rgba(4,20,47,.25);border-radius:2px;margin:0 auto 10px;cursor:pointer"></div>
-      <div style="font:700 15px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f;text-align:center;margin-bottom:10px">{{ sheetTitle }}</div>
+      <div style="font:700 22px 'Space Grotesk',sans-serif;color:#04142f;text-align:center;margin-bottom:10px;line-height:1.2">{{ sheetTitle }}</div>
 
       <sc-if value="{{ resgatado }}" hint-placeholder-val="{{ false }}">
         <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px">
@@ -183,27 +183,6 @@ a:hover{color:#0f2d72}
       </sc-if>
 
       <sc-if value="{{ !resgatado }}" hint-placeholder-val="{{ true }}">
-        <div style="display:flex;gap:8px;align-items:stretch;overflow-x:auto;-webkit-overflow-scrolling:touch">
-
-          <div onClick="{{ reopenStage1 }}" style="{{ tab1Style }}">
-            <sc-if value="{{ stage1Answered }}" hint-placeholder-val="{{ false }}"><div style="width:14px;height:14px;flex:none;border-radius:50%;background:#1f9d55;display:flex;align-items:center;justify-content:center"><div style="width:6px;height:4px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px)"></div></div></sc-if>
-            <sc-if value="{{ stage1Answered }}" hint-placeholder-val="{{ false }}"><span>{{ pick1 }}</span></sc-if>
-            <sc-if value="{{ stage1NotAnswered }}" hint-placeholder-val="{{ true }}"><span>Sabor 1/2</span></sc-if>
-            <sc-if value="{{ stage1Open }}" hint-placeholder-val="{{ true }}"><span style="background:#fceb2e;color:#04142f;font:800 9.5px 'Inter Italic','Space Grotesk',sans-serif;padding:2px 6px;border-radius:4px">33% OFF</span></sc-if>
-          </div>
-
-          <div onClick="{{ reopenStage2 }}" style="{{ tab2Style }}">
-            <sc-if value="{{ stage2Answered }}" hint-placeholder-val="{{ false }}"><div style="width:14px;height:14px;flex:none;border-radius:50%;background:#1f9d55;display:flex;align-items:center;justify-content:center"><div style="width:6px;height:4px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px)"></div></div></sc-if>
-            <sc-if value="{{ stage2Answered }}" hint-placeholder-val="{{ false }}"><span>{{ pick2 }}</span></sc-if>
-            <sc-if value="{{ stage2NotAnswered }}" hint-placeholder-val="{{ true }}"><span>Sabor 2/2</span></sc-if>
-            <sc-if value="{{ stage2Open }}" hint-placeholder-val="{{ false }}"><span style="background:#fceb2e;color:#04142f;font:800 9.5px 'Inter Italic','Space Grotesk',sans-serif;padding:2px 6px;border-radius:4px">33% OFF</span></sc-if>
-          </div>
-
-          <div onClick="{{ reopenStage3 }}" style="{{ tab3Style }}">
-            <sc-if value="{{ stage3Answered }}" hint-placeholder-val="{{ false }}"><div style="width:14px;height:14px;flex:none;border-radius:50%;background:#1f9d55;display:flex;align-items:center;justify-content:center"><div style="width:6px;height:4px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px)"></div></div></sc-if>
-            <span>Brindes Grátis</span>
-          </div>
-        </div>
 
         <div style="margin-top:0;overflow:hidden;border-radius:14px;flex-shrink:0">
           <div style="display:flex;width:300%;transition:transform .5s cubic-bezier(.22,1,.36,1);transform:translateX({{ carouselOffset }}%)">
@@ -393,7 +372,7 @@ class Component extends DCLogic {
       addToCart: this.addToCart,
       pick1, pick2, pick1Img, pick2Img, carouselOffset, tab1Style, tab2Style, tab3Style,
       resgatado,
-      sheetTitle: resgatado ? 'Seu combo está pronto!' : 'Monte seu combo e leve 1 sabor de brinde',
+      sheetTitle: resgatado ? 'Seu combo está pronto!' : 'Escolha seu 1º sabor',
       stage1Open: stage === 1,
       stage1Answered: stage !== 1 && pick1 != null,
       stage1NotAnswered: !(stage !== 1 && pick1 != null),
