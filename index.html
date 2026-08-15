@@ -111,7 +111,7 @@ a:hover{color:#0f2d72}
       </div>
     </div>
 
-    <div id="bottom-cta" onClick="{{ openSheet }}" style="margin:18px 0 28px;background:#0a1832;color:#fceb2e;text-align:center;padding:18px;border-radius:8px;font:700 17px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">Escolher meus sabores →</div>
+    <div id="bottom-cta" onClick="{{ openSheet }}" style="margin:18px 0 28px;background:#0a1832;color:#fceb2e;text-align:center;padding:18px;border-radius:8px;font:700 17px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">RESGATAR OFERTA</div>
 
     <div style="border-top:1px solid rgba(4,20,47,.15)"></div>
     <div style="margin-top:20px;background:#f2f2f2;border-radius:10px;padding:14px;display:flex;align-items:center;gap:12px">
@@ -154,7 +154,7 @@ a:hover{color:#0f2d72}
   </div>
 
   <div style="{{ stickyBarStyle }}">
-    <div onClick="{{ openSheet }}" style="background:#0a1832;color:#fceb2e;text-align:center;padding:18px;border-radius:8px;font:700 17px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">Escolher meus sabores →</div>
+    <div onClick="{{ openSheet }}" style="background:#0a1832;color:#fceb2e;text-align:center;padding:18px;border-radius:8px;font:700 17px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">RESGATAR OFERTA</div>
   </div>
 
   <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
@@ -170,7 +170,7 @@ a:hover{color:#0f2d72}
             <div style="font:700 30px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f">3x de R$ 108,30 <span style="font-size:14px">s/ juros</span></div>
             <div style="font:700 13px 'Inter Italic','Space Grotesk',sans-serif;color:#0f2d72;margin-top:4px">Você economiza R$ 255,07</div>
           </div>
-          <div onClick="{{ addToCart }}" style="background:#0a1832;color:#fceb2e;text-align:center;padding:14px;border-radius:8px;font:700 14px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">Adicionar ao carrinho →</div>
+          <div onClick="{{ addToCart }}" style="background:#0a1832;color:#fceb2e;text-align:center;padding:14px;border-radius:8px;font:700 14px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">RESGATAR OFERTA</div>
         </div>
       </sc-if>
 
@@ -272,7 +272,7 @@ a:hover{color:#0f2d72}
           </div>
         </sc-if>
         <sc-if value="{{ showResgatar }}" hint-placeholder-val="{{ false }}">
-          <div onClick="{{ resgatar }}" style="margin-top:10px;background:#0a1832;color:#fceb2e;text-align:center;padding:17px;border-radius:10px;font:700 16px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">Resgatar →</div>
+          <div onClick="{{ resgatar }}" style="margin-top:10px;background:#0a1832;color:#fceb2e;text-align:center;padding:17px;border-radius:10px;font:700 16px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">RESGATAR OFERTA</div>
         </sc-if>
       </sc-if>
     </div>
@@ -375,7 +375,7 @@ class Component extends DCLogic {
       currentPrizeImg,
       freebieImgKey: carouselTick,
       sheetOpen,
-      headerBtnLabel: addedToCart ? '1 item no carrinho' : 'Escolher kit →',
+      headerBtnLabel: addedToCart ? '1 item no carrinho' : 'RESGATAR OFERTA',
       openSheet: this.openSheet,
       closeSheet: this.closeSheet,
       reopenStage1: this.reopenStage1,
