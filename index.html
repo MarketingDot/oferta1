@@ -169,6 +169,9 @@ a:hover{color:#0f2d72}
     <div onClick="{{ closeSheet }}" style="position:fixed;inset:0;background:rgba(4,20,47,.5)"></div>
     <div style="position:fixed;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;max-height:80vh;background:#ffffff;border-top:2px solid #04142f;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding:10px 16px 16px;box-shadow:0 -6px 0 rgba(4,20,47,.1);overflow-y:auto">
       <div onClick="{{ closeSheet }}" style="width:40px;height:4px;background:rgba(4,20,47,.25);border-radius:2px;margin:0 auto 10px;cursor:pointer"></div>
+      <sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ goBack }}" style="align-self:flex-start;font:500 12px 'Space Grotesk',sans-serif;color:rgba(4,20,47,.4);cursor:pointer;padding:2px 0;margin-bottom:4px" style-hover="color:#04142f">← Voltar</div>
+      </sc-if>
       <div style="font:700 22px 'Space Grotesk',sans-serif;color:#04142f;text-align:center;line-height:1.2">{{ sheetTitle }}</div>
       <div style="margin-top:8px;margin-bottom:12px;display:flex;gap:6px">
         <div style="{{ sheetSeg1 }}"></div>
@@ -367,6 +370,8 @@ class Component extends DCLogic {
       pick1, pick2, pick1Img, pick2Img, carouselOffset, tab1Style, tab2Style, tab3Style,
       resgatado,
       sheetTitle: resgatado ? 'Seu combo está pronto!' : stage === 1 ? 'Escolha seu 1º sabor' : stage === 2 ? 'Escolha seu 2º sabor' : 'Você ganhou os brindes!',
+      showBack: stage > 1 && !resgatado,
+      goBack: stage === 2 ? this.reopenStage1 : this.reopenStage2,
       sheetSeg1: 'flex:1;height:5px;border-radius:3px;background:#1f9d55',
       sheetSeg2: `flex:1;height:5px;border-radius:3px;background:${stage >= 2 ? '#1f9d55' : 'rgba(4,20,47,.12)'}`,
       sheetSeg3: `flex:1;height:5px;border-radius:3px;background:${stage >= 3 ? '#1f9d55' : 'rgba(4,20,47,.12)'}`,
