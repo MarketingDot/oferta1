@@ -16,6 +16,10 @@ body{margin:0;background:#ffffff;font-family:'Inter Italic','Inter Italic','Spac
 a{color:#04142f}
 a:hover{color:#0f2d72}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes spin-border{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.btn-spin-wrap{position:relative;border-radius:10px;overflow:hidden}
+.btn-spin-wrap::before{content:'';position:absolute;inset:-60%;background:conic-gradient(transparent 25%,#fceb2e 50%,transparent 75%);animation:spin-border 2s linear infinite}
+.btn-spin-inner{position:relative;margin:4px;border-radius:7px}
 @keyframes swapIn{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:translateX(0)}}
 @keyframes prizePop{0%{opacity:0;transform:scale(.75) rotate(-6deg)}55%{opacity:1;transform:scale(1.08) rotate(2deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
 .items-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -42,7 +46,9 @@ a:hover{color:#0f2d72}
   <div style="padding:10px 18px 0;display:flex;flex-direction:column">
 <div style="margin-top:0;font:700 26px/1.2 'Space Grotesk',sans-serif;color:#04142f;letter-spacing:-.3px">RECARREGUE SUA ENERGIA E GANHE <span style="background:#fceb2e;color:#04142f;padding:2px 6px;border-radius:3px">4 BRINDES GRÁTIS</span></div>
     <div style="margin-top:18px;font:400 17px/1.5 'Space Grotesk',sans-serif;font-style:normal;color:#000">Compre 2 Pouches do seu sabor favorito e ganhe o <strong>3º Pouch de Graça + Mousepad DOT + Apoio de Teclado DOT + Frete Grátis</strong></div>
-    <div onClick="{{ openSheet }}" style="margin-top:22px;background:#0a1832;color:#fceb2e;text-align:center;padding:18px;border-radius:8px;font:700 17px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer;border:2px solid #fceb2e" style-hover="background:#0d2040">ESCOLHER SABORES + 4 BRINDES <span style="font-size:20px;vertical-align:middle">→</span></div>
+    <div class="btn-spin-wrap" style="margin-top:22px">
+      <div class="btn-spin-inner" onClick="{{ openSheet }}" style="background:#0a1832;color:#fceb2e;text-align:center;padding:18px;font:700 17px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">ESCOLHER SABORES + 4 BRINDES <span style="font-size:20px;vertical-align:middle">→</span></div>
+    </div>
 
     <div onClick="{{ openSheet }}" style="margin-top:24px;border:1px solid #04142f;border-radius:6px;overflow:hidden;background:#ffffff;cursor:pointer">
       <div style="background:#0a1832;color:#fceb2e;text-align:center;padding:10px;font:700 13px 'Inter Italic','Space Grotesk',sans-serif;letter-spacing:.5px">ITENS DA PROMOÇÃO</div>
@@ -110,7 +116,9 @@ a:hover{color:#0f2d72}
       </div>
     </div>
 
-    <div id="bottom-cta" onClick="{{ openSheet }}" style="margin:18px 0 28px;background:#0a1832;color:#fceb2e;text-align:center;padding:18px;border-radius:8px;font:700 17px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer;border:2px solid #fceb2e" style-hover="background:#0d2040">ESCOLHER SABORES + 4 BRINDES <span style="font-size:20px;vertical-align:middle">→</span></div>
+    <div class="btn-spin-wrap" style="margin:18px 0 28px">
+      <div id="bottom-cta" class="btn-spin-inner" onClick="{{ openSheet }}" style="background:#0a1832;color:#fceb2e;text-align:center;padding:18px;font:700 17px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">ESCOLHER SABORES + 4 BRINDES <span style="font-size:20px;vertical-align:middle">→</span></div>
+    </div>
 
     <div style="border-top:1px solid rgba(4,20,47,.15)"></div>
     <div style="margin-top:20px;background:#f2f2f2;border-radius:10px;padding:14px;display:flex;align-items:center;gap:12px">
