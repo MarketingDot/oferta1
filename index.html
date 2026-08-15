@@ -374,7 +374,7 @@ class Component extends DCLogic {
       pick1, pick2, pick1Img, pick2Img, carouselOffset, tab1Style, tab2Style, tab3Style,
       resgatado,
       sheetTitle: resgatado ? 'Seu combo está pronto!' : stage === 1 ? 'Escolha seu 1º sabor' : stage === 2 ? 'Escolha seu 2º sabor' : 'Você ganhou os brindes!',
-      sheetStep: stage === 1 ? '1/2' : stage === 2 ? '2/2' : '2/2 + Brindes',
+      sheetStep: stage === 1 ? '1/2 + Brindes' : '2/2 + Brindes',
       stage1Open: stage === 1,
       stage1Answered: stage !== 1 && pick1 != null,
       stage1NotAnswered: !(stage !== 1 && pick1 != null),
