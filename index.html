@@ -212,13 +212,13 @@ a:hover{color:#0f2d72}
               <div style="display:flex;flex-direction:column;gap:8px;background:#f0f3fb;border-radius:12px;padding:10px;flex:1">
                 <sc-for list="{{ flavorRows }}" as="fr" hint-placeholder-count="4">
                   <sc-if value="{{ fr.hasQty }}" hint-placeholder-val="{{ false }}">
-                    <div onClick="{{ fr.onIncrease }}" style="position:relative;background:#fff;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:12px;flex:1;cursor:pointer">
+                    <div style="position:relative;background:#fff;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:12px;flex:1">
                       <sc-if value="{{ fr.hasBadge }}" hint-placeholder-val="{{ false }}">
                         <div style="position:absolute;top:0;right:10px;background:#fceb2e;color:#04142f;font:700 8px 'Space Grotesk',sans-serif;padding:2px 7px;border-radius:0 0 6px 6px;letter-spacing:.3px;text-transform:uppercase">{{ fr.badge }}</div>
                       </sc-if>
-                      <div style="width:64px;height:64px;flex:none;border-radius:8px;overflow:hidden;background:#f0f3fb"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
-                      <div style="flex:1;font:700 14px 'Space Grotesk',sans-serif;color:#04142f">{{ fr.name }}</div>
-                      <div onclick="event.stopPropagation()" style="display:flex;align-items:center;background:#04142f;border-radius:8px;overflow:hidden;flex:none">
+                      <div onClick="{{ fr.onIncrease }}" style="width:64px;height:64px;flex:none;border-radius:8px;overflow:hidden;background:#f0f3fb;cursor:pointer"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover;pointer-events:none"></div>
+                      <div onClick="{{ fr.onIncrease }}" style="flex:1;font:700 14px 'Space Grotesk',sans-serif;color:#04142f;cursor:pointer">{{ fr.name }}</div>
+                      <div style="display:flex;align-items:center;background:#04142f;border-radius:8px;overflow:hidden;flex:none">
                         <div onClick="{{ fr.onDecrease }}" style="padding:8px 13px;color:#fff;font:700 18px 'Space Grotesk',sans-serif;cursor:pointer;user-select:none;line-height:1">−</div>
                         <div style="padding:0 4px;color:#fff;font:700 14px 'Space Grotesk',sans-serif;min-width:22px;text-align:center">{{ fr.qty }}</div>
                         <div onClick="{{ fr.onIncrease }}" style="{{ fr.plusStyle }}">+</div>
