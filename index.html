@@ -185,6 +185,7 @@ a:hover{color:#0f2d72}
         <div style="{{ sheetSeg2 }}"></div>
         <div style="{{ sheetSeg3 }}"></div>
         <div style="{{ sheetSeg4 }}"></div>
+        <div style="{{ sheetSeg5 }}"></div>
       </div>
 
       <sc-if value="{{ resgatado }}" hint-placeholder-val="{{ false }}">
@@ -201,8 +202,8 @@ a:hover{color:#0f2d72}
       <sc-if value="{{ !resgatado }}" hint-placeholder-val="{{ true }}">
 
         <div style="margin-top:0;overflow:hidden;border-radius:14px;flex-shrink:0">
-          <div style="display:flex;width:400%;transition:transform .5s cubic-bezier(.22,1,.36,1);transform:translateX({{ carouselOffset }}%)">
-            <div style="width:25%;flex:none;box-sizing:border-box;padding:6px 8px 0 1px;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start">
+          <div style="display:flex;width:500%;transition:transform .5s cubic-bezier(.22,1,.36,1);transform:translateX({{ carouselOffset }}%)">
+            <div style="width:20%;flex:none;box-sizing:border-box;padding:6px 8px 0 1px;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start">
               <sc-for list="{{ flavorList1 }}" as="fl" hint-placeholder-count="4">
                 <sc-if value="{{ fl.selected }}" hint-placeholder-val="{{ false }}">
                   <div onClick="{{ fl.onClick }}" style="position:relative;border-radius:12px;border:2px solid #1f9d55;background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer">
@@ -219,7 +220,7 @@ a:hover{color:#0f2d72}
                 </sc-if>
               </sc-for>
             </div>
-            <div style="width:25%;flex:none;box-sizing:border-box;padding:6px 8px 0 1px;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start">
+            <div style="width:20%;flex:none;box-sizing:border-box;padding:6px 8px 0 1px;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start">
               <sc-for list="{{ flavorList2 }}" as="fl" hint-placeholder-count="4">
                 <sc-if value="{{ fl.selected }}" hint-placeholder-val="{{ false }}">
                   <div onClick="{{ fl.onClick }}" style="position:relative;border-radius:12px;border:2px solid #1f9d55;background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer">
@@ -236,7 +237,7 @@ a:hover{color:#0f2d72}
                 </sc-if>
               </sc-for>
             </div>
-            <div style="width:25%;flex:none;box-sizing:border-box;padding:6px 8px 0 1px;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start">
+            <div style="width:20%;flex:none;box-sizing:border-box;padding:6px 8px 0 1px;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start">
               <sc-for list="{{ flavorList3 }}" as="fl" hint-placeholder-count="4">
                 <sc-if value="{{ fl.selected }}" hint-placeholder-val="{{ false }}">
                   <div onClick="{{ fl.onClick }}" style="position:relative;border-radius:12px;border:2px solid #1f9d55;background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer">
@@ -253,7 +254,24 @@ a:hover{color:#0f2d72}
                 </sc-if>
               </sc-for>
             </div>
-            <div style="width:25%;flex:none;box-sizing:border-box;padding:8px 8px 0 1px">
+            <div style="width:20%;flex:none;box-sizing:border-box;padding:6px 8px 0 1px;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start">
+              <sc-for list="{{ flavorList4 }}" as="fl" hint-placeholder-count="4">
+                <sc-if value="{{ fl.selected }}" hint-placeholder-val="{{ false }}">
+                  <div onClick="{{ fl.onClick }}" style="position:relative;border-radius:12px;border:2px solid #fceb2e;background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer">
+                    <div style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#fceb2e;border:2px solid #04142f;display:flex;align-items:center;justify-content:center"><div style="width:6px;height:4px;border-left:1.5px solid #04142f;border-bottom:1.5px solid #04142f;transform:rotate(-45deg) translate(0.5px,-0.5px)"></div></div>
+                    <div style="width:100%;aspect-ratio:1;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fl.img }}" alt="{{ fl.name }}" style="width:100%;height:100%;object-fit:cover"></div>
+                    <div style="font:700 12px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f">{{ fl.name }}</div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ fl.unselected }}" hint-placeholder-val="{{ true }}">
+                  <div onClick="{{ fl.onClick }}" style="border-radius:12px;border:1px solid rgba(4,20,47,.15);background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer" style-hover="border-color:#fceb2e">
+                    <div style="width:100%;aspect-ratio:1;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fl.img }}" alt="{{ fl.name }}" style="width:100%;height:100%;object-fit:cover"></div>
+                    <div style="font:700 12px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f">{{ fl.name }}</div>
+                  </div>
+                </sc-if>
+              </sc-for>
+            </div>
+            <div style="width:20%;flex:none;box-sizing:border-box;padding:8px 8px 0 1px">
               <div style="border-radius:14px;background:linear-gradient(rgba(4,20,47,.6),rgba(4,20,47,.6)),url('./assets/textura-navy.png') center/cover;padding:10px 5px;display:flex;flex-direction:column;gap:8px">
                 <div style="font:600 10px 'Inter Italic','Space Grotesk',sans-serif;color:rgba(252,235,46,.8);padding:0 1px">DESBLOQUEADOS</div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
@@ -312,7 +330,7 @@ const FAQ_DOT = [
 
 
 class Component extends DCLogic {
-  state = { sheetOpen: false, pick1: null, pick2: null, pick3: null, editingStage: null, resgatado: false, addedToCart: false,
+  state = { sheetOpen: false, pick1: null, pick2: null, pick3: null, pick4: null, editingStage: null, resgatado: false, addedToCart: false,
     freebies: { pouch3: true, mousepad: true, keyboard: true, shipping: true }, openFaq: {}, tableOpen: false, promoOpen: false, carouselTick: 0, stickyVisible: true };
 
   componentDidMount() {
@@ -334,6 +352,7 @@ class Component extends DCLogic {
   reopenStage2 = () => this.setState({ editingStage: 2, resgatado: false });
   reopenStage3 = () => this.setState({ editingStage: 3, resgatado: false });
   reopenStage4 = () => this.setState({ editingStage: 4, resgatado: false });
+  reopenStage5 = () => this.setState({ editingStage: 5, resgatado: false });
   resgatar = () => {
     document.body.style.overflow = '';
     try { window.top.location.href = 'https://minhadot.com'; } catch(e) { window.location.href = 'https://minhadot.com'; }
@@ -348,13 +367,14 @@ class Component extends DCLogic {
   togglePromo = () => this.setState(s => ({ promoOpen: !s.promoOpen }));
 
   renderVals() {
-    const { sheetOpen, pick1, pick2, pick3, editingStage, resgatado, addedToCart, freebies, openFaq, tableOpen, promoOpen, carouselTick, stickyVisible } = this.state;
-    const naturalStage = pick1 == null ? 1 : pick2 == null ? 2 : pick3 == null ? 3 : 4;
+    const { sheetOpen, pick1, pick2, pick3, pick4, editingStage, resgatado, addedToCart, freebies, openFaq, tableOpen, promoOpen, carouselTick, stickyVisible } = this.state;
+    const naturalStage = pick1 == null ? 1 : pick2 == null ? 2 : pick3 == null ? 3 : pick4 == null ? 4 : 5;
     const stage = editingStage || naturalStage;
     const pick1Img = (FLAVORS.find(f => f.name === pick1) || {}).img;
     const pick2Img = (FLAVORS.find(f => f.name === pick2) || {}).img;
     const pick3Img = (FLAVORS.find(f => f.name === pick3) || {}).img;
-    const carouselOffset = -(stage - 1) * 100 / 4;
+    const pick4Img = (FLAVORS.find(f => f.name === pick4) || {}).img;
+    const carouselOffset = -(stage - 1) * 100 / 5;
     const tabStyle = (open, answered) => {
       const base = "border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap;font:700 12px 'Inter Italic','Space Grotesk',sans-serif;flex:none";
       if (open) return base + ";border:1.5px solid #04142f;background:#fff;color:#04142f";
@@ -376,6 +396,10 @@ class Component extends DCLogic {
     const flavorList3 = FLAVORS.map(f => {
       const selected = pick3 === f.name;
       return { name: f.name, img: f.img, selected, unselected: !selected, onClick: () => this.setState({ pick3: f.name, editingStage: null }) };
+    });
+    const flavorList4 = FLAVORS.map(f => {
+      const selected = pick4 === f.name;
+      return { name: f.name, img: f.img, selected, unselected: !selected, onClick: () => this.setState({ pick4: f.name, editingStage: null }) };
     });
 
     const FREEBIE_DEFS = [
@@ -404,15 +428,16 @@ class Component extends DCLogic {
       reopenStage3: this.reopenStage3,
       resgatar: this.resgatar,
       addToCart: this.addToCart,
-      pick1, pick2, pick3, pick1Img, pick2Img, pick3Img, carouselOffset, tab1Style, tab2Style, tab3Style,
+      pick1, pick2, pick3, pick4, pick1Img, pick2Img, pick3Img, pick4Img, carouselOffset, tab1Style, tab2Style, tab3Style,
       resgatado,
-      sheetTitle: resgatado ? 'Seu combo está pronto!' : stage === 1 ? 'Escolha seu 1º sabor' : stage === 2 ? 'Escolha seu 2º sabor' : stage === 3 ? 'Escolha seu 3º sabor' : 'Você ganhou os brindes!',
+      sheetTitle: resgatado ? 'Seu combo está pronto!' : stage === 1 ? 'Escolha seu 1º sabor' : stage === 2 ? 'Escolha seu 2º sabor' : stage === 3 ? 'Escolha seu 3º sabor' : stage === 4 ? 'Escolha seu sabor grátis' : 'Você ganhou os brindes!',
       showBack: stage > 1 && !resgatado,
-      goBack: stage === 2 ? this.reopenStage1 : stage === 3 ? this.reopenStage2 : this.reopenStage3,
+      goBack: stage === 2 ? this.reopenStage1 : stage === 3 ? this.reopenStage2 : stage === 4 ? this.reopenStage3 : this.reopenStage4,
       sheetSeg1: 'flex:1;height:5px;border-radius:3px;background:#1f9d55',
       sheetSeg2: `flex:1;height:5px;border-radius:3px;background:${stage >= 2 ? '#1f9d55' : 'rgba(4,20,47,.12)'}`,
       sheetSeg3: `flex:1;height:5px;border-radius:3px;background:${stage >= 3 ? '#1f9d55' : 'rgba(4,20,47,.12)'}`,
       sheetSeg4: `flex:1;height:5px;border-radius:3px;background:${stage >= 4 ? '#1f9d55' : 'rgba(4,20,47,.12)'}`,
+      sheetSeg5: `flex:1;height:5px;border-radius:3px;background:${stage >= 5 ? '#1f9d55' : 'rgba(4,20,47,.12)'}`,
       stage1Open: stage === 1,
       stage1Answered: stage !== 1 && pick1 != null,
       stage1NotAnswered: !(stage !== 1 && pick1 != null),
@@ -423,9 +448,10 @@ class Component extends DCLogic {
       stage3Locked: stage !== 3 && pick3 == null,
       stage3Answered: stage !== 3 && pick3 != null,
       stage3Open: stage === 3,
-      showUnlockBar: naturalStage < 4,
-      showResgatar: naturalStage === 4,
+      showUnlockBar: naturalStage < 5,
+      showResgatar: naturalStage === 5,
       flavorList3,
+      flavorList4,
       marqueeItems: [
         { text: 'OFERTA TERMINA EM 14 DIAS' },
         { text: 'APENAS 100 UNIDADES DISPONÍVEIS' },
