@@ -197,11 +197,10 @@ a:hover{color:#0f2d72}
       </sc-if>
 
       <sc-if value="{{ notResgatado }}" hint-placeholder-val="{{ true }}">
-        <div style="overflow:hidden;margin:0 -16px">
-          <div style="{{ stageContainerStyle }}">
+        <div style="position:relative;overflow:hidden;margin:0 -16px">
 
             <!-- stage 1: escolher sabores pagos -->
-            <div style="width:100%;flex:none;box-sizing:border-box;padding:0 16px;display:flex;flex-direction:column;gap:10px">
+            <div style="{{ stage1PanelStyle }}">
               <div style="text-align:right;font:700 12px 'Space Grotesk',sans-serif;color:#04142f">{{ flavorCountLabel }}</div>
               <div style="display:flex;flex-direction:column;gap:8px;background:#f0f3fb;border-radius:12px;padding:10px">
                 <sc-for list="{{ flavorRows }}" as="fr" hint-placeholder-count="4">
@@ -238,7 +237,7 @@ a:hover{color:#0f2d72}
             </div>
 
             <!-- stage 2: escolher sabor grátis -->
-            <div style="width:100%;flex:none;box-sizing:border-box;padding:0 16px;display:flex;flex-direction:column;gap:10px">
+            <div style="{{ stage2PanelStyle }}">
               <div data-back-btn onClick="{{ backToFlavors }}" style="align-self:flex-start;font:500 12px 'Space Grotesk',sans-serif;color:rgba(4,20,47,.4);cursor:pointer" style-hover="color:#04142f">← Voltar</div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start">
                 <sc-for list="{{ freeFlavorRows }}" as="fr" hint-placeholder-count="4">
@@ -264,7 +263,7 @@ a:hover{color:#0f2d72}
             </div>
 
             <!-- stage 3: brindes desbloqueados + finalizar -->
-            <div style="width:100%;flex:none;box-sizing:border-box;padding:0 16px;display:flex;flex-direction:column;gap:12px">
+            <div style="{{ stage3PanelStyle }}">
               <div style="border-radius:14px;background:linear-gradient(rgba(4,20,47,.6),rgba(4,20,47,.6)),url('./assets/textura-navy.png') center/cover;padding:12px;display:flex;flex-direction:column;gap:8px">
                 <div style="font:600 10px 'Inter Italic','Space Grotesk',sans-serif;color:rgba(252,235,46,.8);padding:0 1px">DESBLOQUEADOS</div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
@@ -281,7 +280,6 @@ a:hover{color:#0f2d72}
               <div onClick="{{ resgatar }}" style="background:#fceb2e;color:#04142f;text-align:center;padding:17px;border-radius:10px;font:700 16px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">FINALIZAR COMPRA <span style="font-size:20px;vertical-align:middle">→</span></div>
             </div>
 
-          </div>
         </div>
       </sc-if>
     </div>
@@ -430,7 +428,9 @@ class Component extends DCLogic {
       stage1: naturalStage === 1 && !resgatado,
       stage2: naturalStage === 2 && !resgatado,
       stage3: naturalStage === 3 && !resgatado,
-      stageContainerStyle: `display:flex;will-change:transform;transition:transform .38s cubic-bezier(.25,.46,.45,.94);transform:translateX(${-(naturalStage - 1) * 100}%)`,
+      stage1PanelStyle: `position:${naturalStage===1?'relative':'absolute'};top:0;left:0;width:100%;box-sizing:border-box;padding:0 16px;display:flex;flex-direction:column;gap:10px;transform:translateX(${(1-naturalStage)*100}%);transition:transform .38s cubic-bezier(.25,.46,.45,.94)${naturalStage!==1?';pointer-events:none':''}`,
+      stage2PanelStyle: `position:${naturalStage===2?'relative':'absolute'};top:0;left:0;width:100%;box-sizing:border-box;padding:0 16px;display:flex;flex-direction:column;gap:10px;transform:translateX(${(2-naturalStage)*100}%);transition:transform .38s cubic-bezier(.25,.46,.45,.94)${naturalStage!==2?';pointer-events:none':''}`,
+      stage3PanelStyle: `position:${naturalStage===3?'relative':'absolute'};top:0;left:0;width:100%;box-sizing:border-box;padding:0 16px;display:flex;flex-direction:column;gap:12px;transform:translateX(${(3-naturalStage)*100}%);transition:transform .38s cubic-bezier(.25,.46,.45,.94)${naturalStage!==3?';pointer-events:none':''}`,
       sheetTitle: resgatado ? 'Seu combo está pronto!' : naturalStage === 1 ? 'Escolha seus sabores' : naturalStage === 2 ? 'Escolha seu sabor grátis' : 'Você ganhou os brindes!',
       sheetSeg1: 'flex:1;height:5px;border-radius:3px;background:#1f9d55',
       sheetSeg2: `flex:1;height:5px;border-radius:3px;background:${naturalStage >= 2 ? '#1f9d55' : 'rgba(4,20,47,.12)'}`,
