@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:'Inter Italic';src:url('./assets/Inter-Italic.ttf') format('truetype-variations');font-weight:100 900;font-style:italic}
-body{margin:0;background:#ffffff;font-family:'Inter Italic','Inter Italic','Space Grotesk',sans-serif}
+body{margin:0;background:#ffffff;font-family:'Inter Italic','Inter Italic','Space Grotesk',sans-serif;overscroll-behavior:none}
 a{color:#04142f}
 a:hover{color:#0f2d72}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -512,23 +512,32 @@ document.addEventListener('click', function(e) {
 });
 
 (function() {
-  var startX = 0, startY = 0;
+  var startX = 0, startY = 0, swiping = false;
   document.addEventListener('touchstart', function(e) {
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
+    swiping = false;
   }, { passive: true });
+  document.addEventListener('touchmove', function(e) {
+    if (!document.querySelector('[data-next-btn]')) return;
+    var dx = Math.abs(e.touches[0].clientX - startX);
+    var dy = Math.abs(e.touches[0].clientY - startY);
+    if (dx > dy && dx > 8) { swiping = true; e.preventDefault(); }
+  }, { passive: false });
   document.addEventListener('touchend', function(e) {
+    if (!swiping) return;
     var dx = e.changedTouches[0].clientX - startX;
     var dy = e.changedTouches[0].clientY - startY;
-    if (Math.abs(dy) >= Math.abs(dx) * 0.75) return;
-    if (dx > 60) {
+    if (Math.abs(dy) >= Math.abs(dx) * 0.75 || Math.abs(dx) < 60) return;
+    e.preventDefault();
+    if (dx > 0) {
       var btn = document.querySelector('[data-back-btn]');
       if (btn) btn.click();
-    } else if (dx < -60) {
+    } else {
       var btn = document.querySelector('[data-next-btn]');
       if (btn) btn.click();
     }
-  }, { passive: true });
+  }, { passive: false });
 })();
 </script>
 </body>
