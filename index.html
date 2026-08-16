@@ -416,15 +416,16 @@ class Component extends DCLogic {
       };
     });
 
+    const effectivePick = pickFree || this.state.lastPickFree || null;
     const freeFlavorRows = FLAVORS.map(f => ({
       name: f.name,
       img: f.img,
       badge: f.badge,
       hasBadge: f.badge !== '',
-      selected: pickFree === f.name,
-      unselected: pickFree !== f.name,
+      selected: effectivePick === f.name,
+      unselected: effectivePick !== f.name,
       onSelect: () => this.selectFree(f.name),
-      rowStyle: `position:relative;background:#fff;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:12px;flex:1;cursor:pointer;border:1.5px solid ${pickFree === f.name ? '#1f9d55' : 'transparent'}`,
+      rowStyle: `position:relative;background:#fff;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:12px;flex:1;cursor:pointer;border:1.5px solid ${effectivePick === f.name ? '#1f9d55' : 'transparent'}`,
     }));
 
     const FREEBIE_DEFS = [
