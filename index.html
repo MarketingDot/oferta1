@@ -190,6 +190,8 @@ a:hover{color:#0f2d72}
         <div style="{{ sheetSeg3 }}"></div>
       </div>
 
+      <div data-next-btn onClick="{{ goForward }}" style="display:none"></div>
+
       <sc-if value="{{ resgatado }}" hint-placeholder-val="{{ false }}">
         <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px">
           <div style="text-align:center">
@@ -362,6 +364,12 @@ class Component extends DCLogic {
   }));
   backToFlavors = () => this.setState({ confirmedPaid: false });
   backToFreeStep = () => this.setState({ pickFree: null });
+  goForward = () => {
+    const { quantities, confirmedPaid, pickFree, hasReachedStage3 } = this.state;
+    const total = Object.values(quantities).reduce((a, b) => a + b, 0);
+    if (!confirmedPaid && total === 3) { this.setState({ confirmedPaid: true }); return; }
+    if (confirmedPaid && (pickFree !== null || hasReachedStage3)) { this.addToCart(); }
+  };
   selectFree = (name) => this.setState({ pickFree: name, hasReachedStage3: true });
   resgatar = () => {
     document.body.style.overflow = '';
@@ -444,6 +452,7 @@ class Component extends DCLogic {
       stage3PanelStyle: `grid-area:1/1;min-width:0;box-sizing:border-box;padding:0 16px;display:flex;flex-direction:column;gap:12px;transform:translateX(${(3-naturalStage)*100}%);transition:transform .38s cubic-bezier(.25,.46,.45,.94)${naturalStage!==3?';pointer-events:none':''}`,
       sheetTitle: resgatado ? 'Seu combo está pronto!' : naturalStage === 1 ? 'Escolha seus sabores' : naturalStage === 2 ? 'Escolha seu sabor grátis' : 'Você ganhou os brindes!',
       sheetTitleStyle: `font:700 22px 'Space Grotesk',sans-serif;color:#04142f;line-height:1.2;flex:1${naturalStage === 1 || resgatado ? ';text-align:center' : ''}`,
+      goForward: this.goForward,
       showBackBtn: (naturalStage === 2 || naturalStage === 3) && !resgatado,
       showFinalizeBtn: this.state.hasReachedStage3,
       showFreebieCard: !this.state.hasReachedStage3,
@@ -503,8 +512,12 @@ document.addEventListener('click', function(e) {
   document.addEventListener('touchend', function(e) {
     var dx = e.changedTouches[0].clientX - startX;
     var dy = e.changedTouches[0].clientY - startY;
-    if (dx > 60 && Math.abs(dy) < Math.abs(dx) * 0.75) {
+    if (Math.abs(dy) >= Math.abs(dx) * 0.75) return;
+    if (dx > 60) {
       var btn = document.querySelector('[data-back-btn]');
+      if (btn) btn.click();
+    } else if (dx < -60) {
+      var btn = document.querySelector('[data-next-btn]');
       if (btn) btn.click();
     }
   }, { passive: true });
