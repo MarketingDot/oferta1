@@ -236,7 +236,7 @@ a:hover{color:#0f2d72}
 
       <sc-if value="{{ stage2 }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex;flex-direction:column;gap:10px;animation:slideInRight .45s ease-out">
-          <div onClick="{{ backToFlavors }}" style="align-self:flex-start;font:500 12px 'Space Grotesk',sans-serif;color:rgba(4,20,47,.4);cursor:pointer" style-hover="color:#04142f">← Voltar</div>
+          <div data-back-btn onClick="{{ backToFlavors }}" style="align-self:flex-start;font:500 12px 'Space Grotesk',sans-serif;color:rgba(4,20,47,.4);cursor:pointer" style-hover="color:#04142f">← Voltar</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start">
             <sc-for list="{{ freeFlavorRows }}" as="fr" hint-placeholder-count="4">
               <sc-if value="{{ fr.selected }}" hint-placeholder-val="{{ false }}">
@@ -275,6 +275,7 @@ a:hover{color:#0f2d72}
               </sc-for>
             </div>
           </div>
+          <div data-back-btn onClick="{{ backToFreeStep }}" style="align-self:flex-start;font:500 12px 'Space Grotesk',sans-serif;color:rgba(4,20,47,.4);cursor:pointer" style-hover="color:#04142f">← Voltar</div>
           <div onClick="{{ resgatar }}" style="background:#fceb2e;color:#04142f;text-align:center;padding:17px;border-radius:10px;font:700 16px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">FINALIZAR COMPRA <span style="font-size:20px;vertical-align:middle">→</span></div>
         </div>
       </sc-if>
@@ -346,6 +347,7 @@ class Component extends DCLogic {
     confirmedPaid: false,
   }));
   backToFlavors = () => this.setState({ confirmedPaid: false });
+  backToFreeStep = () => this.setState({ pickFree: null });
   selectFree = (name) => this.setState({ pickFree: name });
   resgatar = () => {
     document.body.style.overflow = '';
@@ -433,6 +435,7 @@ class Component extends DCLogic {
       freeFlavorRows,
       freebieList,
       backToFlavors: this.backToFlavors,
+      backToFreeStep: this.backToFreeStep,
       marqueeItems: [
         { text: 'OFERTA TERMINA EM 14 DIAS' },
         { text: 'APENAS 100 UNIDADES DISPONÍVEIS' },
@@ -470,6 +473,22 @@ document.addEventListener('click', function(e) {
     document.getElementById('img-lightbox').style.display = 'none';
   }
 });
+
+(function() {
+  var startX = 0, startY = 0;
+  document.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - startX;
+    var dy = e.changedTouches[0].clientY - startY;
+    if (dx > 60 && Math.abs(dy) < Math.abs(dx) * 0.75) {
+      var btn = document.querySelector('[data-back-btn]');
+      if (btn) btn.click();
+    }
+  }, { passive: true });
+})();
 </script>
 </body>
 </html>
