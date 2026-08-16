@@ -224,21 +224,21 @@ a:hover{color:#0f2d72}
 
       <sc-if value="{{ stage2 }}" hint-placeholder-val="{{ false }}">
         <div onClick="{{ backToFlavors }}" style="align-self:flex-start;font:500 12px 'Space Grotesk',sans-serif;color:rgba(4,20,47,.4);cursor:pointer;padding:2px 0;margin-bottom:10px" style-hover="color:#04142f">← Voltar</div>
-        <div style="display:flex;flex-direction:column;gap:8px;background:#f0f3fb;border-radius:12px;padding:10px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start">
           <sc-for list="{{ freeFlavorRows }}" as="fr" hint-placeholder-count="4">
-            <div onClick="{{ fr.onSelect }}" style="{{ fr.rowStyle }}">
-              <sc-if value="{{ fr.hasBadge }}" hint-placeholder-val="{{ false }}">
-                <div style="position:absolute;top:0;right:10px;background:#fceb2e;color:#04142f;font:700 8px 'Space Grotesk',sans-serif;padding:2px 7px;border-radius:0 0 6px 6px;letter-spacing:.3px;text-transform:uppercase">{{ fr.badge }}</div>
-              </sc-if>
-              <div style="width:48px;height:48px;flex:none;border-radius:8px;overflow:hidden;background:#f0f3fb"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:contain"></div>
-              <div style="flex:1;font:700 14px 'Space Grotesk',sans-serif;color:#04142f">{{ fr.name }}</div>
-              <sc-if value="{{ fr.selected }}" hint-placeholder-val="{{ false }}">
-                <div style="width:26px;height:26px;border-radius:50%;background:#1f9d55;flex:none;display:flex;align-items:center;justify-content:center"><div style="width:8px;height:6px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(0.5px,-1px)"></div></div>
-              </sc-if>
-              <sc-if value="{{ fr.unselected }}" hint-placeholder-val="{{ true }}">
-                <div style="background:#04142f;color:#fff;border-radius:8px;padding:8px 14px;font:700 11px 'Space Grotesk',sans-serif;white-space:nowrap;flex:none">SELECIONAR</div>
-              </sc-if>
-            </div>
+            <sc-if value="{{ fr.selected }}" hint-placeholder-val="{{ false }}">
+              <div onClick="{{ fr.onSelect }}" style="position:relative;border-radius:12px;border:2px solid #fceb2e;background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer">
+                <div style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#fceb2e;border:2px solid #04142f;display:flex;align-items:center;justify-content:center"><div style="width:6px;height:4px;border-left:1.5px solid #04142f;border-bottom:1.5px solid #04142f;transform:rotate(-45deg) translate(0.5px,-0.5px)"></div></div>
+                <div style="width:100%;aspect-ratio:1;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
+                <div style="font:700 12px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f;text-align:center">{{ fr.name }}</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ fr.unselected }}" hint-placeholder-val="{{ true }}">
+              <div onClick="{{ fr.onSelect }}" style="border-radius:12px;border:1px solid rgba(4,20,47,.15);background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer" style-hover="border-color:#fceb2e">
+                <div style="width:100%;aspect-ratio:1;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
+                <div style="font:700 12px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f;text-align:center">{{ fr.name }}</div>
+              </div>
+            </sc-if>
           </sc-for>
         </div>
       </sc-if>
@@ -247,7 +247,7 @@ a:hover{color:#0f2d72}
         <div style="border-radius:14px;background:linear-gradient(rgba(4,20,47,.6),rgba(4,20,47,.6)),url('./assets/textura-navy.png') center/cover;padding:12px;display:flex;flex-direction:column;gap:8px">
           <div style="font:600 10px 'Inter Italic','Space Grotesk',sans-serif;color:rgba(252,235,46,.8);padding:0 1px">DESBLOQUEADOS</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <sc-for list="{{ freebieList }}" as="fb" hint-placeholder-count="5">
+            <sc-for list="{{ freebieList }}" as="fb" hint-placeholder-count="4">
               <div style="position:relative;border-radius:12px;border:2px solid #fceb2e;background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px">
                 <div style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#fceb2e;border:2px solid #04142f;display:flex;align-items:center;justify-content:center"><div style="width:6px;height:4px;border-left:1.5px solid #04142f;border-bottom:1.5px solid #04142f;transform:rotate(-45deg) translate(0.5px,-0.5px)"></div></div>
                 <div style="width:100%;aspect-ratio:1;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fb.img }}" alt="{{ fb.label }}" style="{{ fb.imgStyle }}"></div>
@@ -371,7 +371,6 @@ class Component extends DCLogic {
     }));
 
     const FREEBIE_DEFS = [
-      { label: '4º Pouch Grátis', img: './assets/pouch-melancia.png', imgStyle: 'width:100%;height:100%;object-fit:contain' },
       { label: 'Mouse Pad DOT', img: './assets/mousepad-dot.png', imgStyle: 'width:100%;height:100%;object-fit:contain' },
       { label: 'Apoio de Teclado', img: './assets/apoio-teclado.png', imgStyle: 'width:100%;height:100%;object-fit:contain' },
       { label: 'Bloco de Anotações', img: './assets/bloco-anotacoes.png', imgStyle: 'width:95%;height:95%;object-fit:contain' },
