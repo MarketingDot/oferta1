@@ -178,7 +178,12 @@ a:hover{color:#0f2d72}
     <div onClick="{{ closeSheet }}" style="position:fixed;inset:0;background:rgba(4,20,47,.5)"></div>
     <div style="position:fixed;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;max-height:85vh;background:#ffffff;border-top:2px solid #04142f;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding:10px 16px 16px;box-shadow:0 -6px 0 rgba(4,20,47,.1);overflow-y:auto;overflow-x:hidden">
       <div onClick="{{ closeSheet }}" style="width:40px;height:4px;background:rgba(4,20,47,.25);border-radius:2px;margin:0 auto 12px;cursor:pointer"></div>
-      <div style="font:700 22px 'Space Grotesk',sans-serif;color:#04142f;text-align:center;line-height:1.2">{{ sheetTitle }}</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <sc-if value="{{ showBackBtn }}" hint-placeholder-val="{{ false }}">
+          <div data-back-btn onClick="{{ backAction }}" style="flex:none;cursor:pointer;color:rgba(4,20,47,.4);font:500 22px 'Space Grotesk',sans-serif;line-height:1;padding:0 4px" style-hover="color:#04142f">←</div>
+        </sc-if>
+        <div style="{{ sheetTitleStyle }}">{{ sheetTitle }}</div>
+      </div>
       <div style="margin-top:8px;margin-bottom:14px;display:flex;gap:6px">
         <div style="{{ sheetSeg1 }}"></div>
         <div style="{{ sheetSeg2 }}"></div>
@@ -243,19 +248,18 @@ a:hover{color:#0f2d72}
                   <sc-if value="{{ fr.selected }}" hint-placeholder-val="{{ false }}">
                     <div onClick="{{ fr.onSelect }}" style="position:relative;border-radius:12px;border:2px solid #fceb2e;background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer">
                       <div style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#fceb2e;border:2px solid #04142f;display:flex;align-items:center;justify-content:center"><div style="width:6px;height:4px;border-left:1.5px solid #04142f;border-bottom:1.5px solid #04142f;transform:rotate(-45deg) translate(0.5px,-0.5px)"></div></div>
-                      <div style="width:100%;height:120px;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
+                      <div style="width:100%;height:140px;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
                       <div style="font:700 12px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f;text-align:center">{{ fr.name }}</div>
                     </div>
                   </sc-if>
                   <sc-if value="{{ fr.unselected }}" hint-placeholder-val="{{ true }}">
                     <div onClick="{{ fr.onSelect }}" style="border-radius:12px;border:1px solid rgba(4,20,47,.15);background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer" style-hover="border-color:#fceb2e">
-                      <div style="width:100%;height:120px;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
+                      <div style="width:100%;height:140px;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
                       <div style="font:700 12px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f;text-align:center">{{ fr.name }}</div>
                     </div>
                   </sc-if>
                 </sc-for>
               </div>
-              <div data-back-btn onClick="{{ backToFlavors }}" style="align-self:center;font:500 12px 'Space Grotesk',sans-serif;color:rgba(4,20,47,.4);cursor:pointer;text-align:center" style-hover="color:#04142f">← Voltar</div>
               <div style="border:2px solid #04142f;border-radius:10px;background:#f0f3fb;padding:14px;display:flex;align-items:center;gap:12px">
                 <div style="flex:1;font:600 12px/1.4 'Inter Italic','Space Grotesk',sans-serif;color:#04142f">Você já desbloqueou: 4º Pouch, Mouse Pad, Apoio de Teclado, Bloco de Anotações e Frete Grátis</div>
                 <div style="width:60px;height:60px;flex:none;background:#dbe3f2;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img key="{{ freebieImgKey }}" src="{{ currentPrizeImg }}" alt="Prêmios DOT" style="width:100%;height:100%;object-fit:contain;animation:prizePop .6s cubic-bezier(.22,1,.36,1)"></div>
@@ -268,12 +272,11 @@ a:hover{color:#0f2d72}
                 <sc-for list="{{ freebieList }}" as="fb" hint-placeholder-count="4">
                   <div style="position:relative;border-radius:12px;border:2px solid #fceb2e;background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px">
                     <div style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#fceb2e;border:2px solid #04142f;display:flex;align-items:center;justify-content:center"><div style="width:6px;height:4px;border-left:1.5px solid #04142f;border-bottom:1.5px solid #04142f;transform:rotate(-45deg) translate(0.5px,-0.5px)"></div></div>
-                    <div style="width:100%;height:120px;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fb.img }}" alt="{{ fb.label }}" style="{{ fb.imgStyle }}"></div>
+                    <div style="width:100%;height:140px;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fb.img }}" alt="{{ fb.label }}" style="{{ fb.imgStyle }}"></div>
                     <div style="font:700 10.5px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f;text-align:center;line-height:1.15">{{ fb.label }}</div>
                   </div>
                 </sc-for>
               </div>
-              <div data-back-btn onClick="{{ backToFreeStep }}" style="align-self:center;font:500 12px 'Space Grotesk',sans-serif;color:rgba(4,20,47,.4);cursor:pointer;text-align:center" style-hover="color:#04142f">← Voltar</div>
               <div onClick="{{ resgatar }}" style="background:#fceb2e;color:#04142f;text-align:center;padding:17px;border-radius:10px;font:700 16px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">FINALIZAR COMPRA <span style="font-size:20px;vertical-align:middle">→</span></div>
             </div>
 
@@ -429,6 +432,9 @@ class Component extends DCLogic {
       stage2PanelStyle: `grid-area:1/1;min-width:0;box-sizing:border-box;padding:0 16px;display:flex;flex-direction:column;gap:10px;transform:translateX(${(2-naturalStage)*100}%);transition:transform .38s cubic-bezier(.25,.46,.45,.94)${naturalStage!==2?';pointer-events:none':''}`,
       stage3PanelStyle: `grid-area:1/1;min-width:0;box-sizing:border-box;padding:0 16px;display:flex;flex-direction:column;gap:12px;transform:translateX(${(3-naturalStage)*100}%);transition:transform .38s cubic-bezier(.25,.46,.45,.94)${naturalStage!==3?';pointer-events:none':''}`,
       sheetTitle: resgatado ? 'Seu combo está pronto!' : naturalStage === 1 ? 'Escolha seus sabores' : naturalStage === 2 ? 'Escolha seu sabor grátis' : 'Você ganhou os brindes!',
+      sheetTitleStyle: `font:700 22px 'Space Grotesk',sans-serif;color:#04142f;line-height:1.2;flex:1${naturalStage === 1 || resgatado ? ';text-align:center' : ''}`,
+      showBackBtn: (naturalStage === 2 || naturalStage === 3) && !resgatado,
+      backAction: naturalStage === 2 ? this.backToFlavors : this.backToFreeStep,
       sheetSeg1: 'flex:1;height:5px;border-radius:3px;background:#1f9d55',
       sheetSeg2: `flex:1;height:5px;border-radius:3px;background:${naturalStage >= 2 ? '#1f9d55' : 'rgba(4,20,47,.12)'}`,
       sheetSeg3: `flex:1;height:5px;border-radius:3px;background:${naturalStage >= 3 ? '#1f9d55' : 'rgba(4,20,47,.12)'}`,
