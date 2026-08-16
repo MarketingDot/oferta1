@@ -371,12 +371,15 @@ class Component extends DCLogic {
     confirmedPaid: false,
   }));
   backToFlavors = () => this.setState({ confirmedPaid: false });
-  backToFreeStep = () => this.setState({ pickFree: null });
+  backToFreeStep = () => this.setState(s => ({ lastPickFree: s.pickFree, pickFree: null }));
   goForward = () => {
-    const { quantities, confirmedPaid, pickFree, hasReachedStage3 } = this.state;
+    const { quantities, confirmedPaid, pickFree, hasReachedStage3, lastPickFree } = this.state;
     const total = Object.values(quantities).reduce((a, b) => a + b, 0);
     if (!confirmedPaid && total === 3) { this.setState({ confirmedPaid: true }); return; }
-    if (confirmedPaid && (pickFree !== null || hasReachedStage3)) { this.addToCart(); }
+    if (confirmedPaid && pickFree === null && hasReachedStage3 && lastPickFree) {
+      this.setState({ pickFree: lastPickFree }); return;
+    }
+    if (confirmedPaid && pickFree !== null) { this.addToCart(); }
   };
   selectFree = (name) => this.setState({ pickFree: name, hasReachedStage3: true });
   resgatar = () => {
