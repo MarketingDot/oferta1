@@ -176,7 +176,7 @@ a:hover{color:#0f2d72}
 
   <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeSheet }}" style="position:fixed;inset:0;background:rgba(4,20,47,.5)"></div>
-    <div style="position:fixed;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;max-height:85vh;background:#ffffff;border-top:2px solid #04142f;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding:10px 16px 16px;box-shadow:0 -6px 0 rgba(4,20,47,.1);overflow-y:auto">
+    <div style="position:fixed;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;max-height:85vh;background:#ffffff;border-top:2px solid #04142f;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding:10px 16px 16px;box-shadow:0 -6px 0 rgba(4,20,47,.1);overflow-y:auto;overflow-x:hidden">
       <div onClick="{{ closeSheet }}" style="width:40px;height:4px;background:rgba(4,20,47,.25);border-radius:2px;margin:0 auto 12px;cursor:pointer"></div>
       <div style="font:700 22px 'Space Grotesk',sans-serif;color:#04142f;text-align:center;line-height:1.2">{{ sheetTitle }}</div>
       <div style="margin-top:8px;margin-bottom:14px;display:flex;gap:6px">
