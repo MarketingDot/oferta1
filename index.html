@@ -176,7 +176,7 @@ a:hover{color:#0f2d72}
 
   <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeSheet }}" style="position:fixed;inset:0;background:rgba(4,20,47,.5)"></div>
-    <div style="position:fixed;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;max-height:85vh;background:#ffffff;border-top:2px solid #04142f;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding:10px 16px 16px;box-shadow:0 -6px 0 rgba(4,20,47,.1);overflow-y:auto;overflow-x:hidden">
+    <div style="position:fixed;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;max-height:85vh;background:#ffffff;border-top:2px solid #04142f;border-radius:18px 18px 0 0;display:flex;flex-direction:column;padding:10px 16px 16px;box-shadow:0 -6px 0 rgba(4,20,47,.1);overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain">
       <div onClick="{{ closeSheet }}" style="width:40px;height:4px;background:rgba(4,20,47,.25);border-radius:2px;margin:0 auto 12px;cursor:pointer"></div>
       <div style="display:flex;align-items:center;gap:10px">
         <sc-if value="{{ showBackBtn }}" hint-placeholder-val="{{ false }}">
@@ -349,8 +349,16 @@ class Component extends DCLogic {
     if (this._observer) this._observer.disconnect();
   }
 
-  openSheet = () => { document.body.style.overflow = 'hidden'; this.setState({ sheetOpen: true }); };
-  closeSheet = () => { document.body.style.overflow = ''; this.setState({ sheetOpen: false }); };
+  openSheet = () => {
+    this._bodyScrollY = window.scrollY;
+    document.body.style.cssText = `position:fixed;top:-${this._bodyScrollY}px;width:100%;overflow:hidden`;
+    this.setState({ sheetOpen: true });
+  };
+  closeSheet = () => {
+    document.body.style.cssText = '';
+    window.scrollTo(0, this._bodyScrollY || 0);
+    this.setState({ sheetOpen: false });
+  };
   increaseQty = (key) => this.setState(s => {
     const total = Object.values(s.quantities).reduce((a, b) => a + b, 0);
     if (total >= 3) return {};
