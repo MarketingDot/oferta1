@@ -17,6 +17,8 @@ a{color:#04142f}
 a:hover{color:#0f2d72}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes swapIn{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-32px)}to{opacity:1;transform:translateX(0)}}
 @keyframes prizePop{0%{opacity:0;transform:scale(.75) rotate(-6deg)}55%{opacity:1;transform:scale(1.08) rotate(2deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
 .items-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media(max-width:451px){.items-grid{grid-template-columns:repeat(2,1fr)}}
@@ -194,96 +196,88 @@ a:hover{color:#0f2d72}
         </div>
       </sc-if>
 
-      <div style="overflow:hidden">
-        <div style="display:flex;width:300%;transition:transform .5s cubic-bezier(.22,1,.36,1);transform:translateX({{ stageOffset }}%)">
-
-          <!-- PAINEL 1: Sabores pagos -->
-          <div style="width:33.3333%;flex:none;box-sizing:border-box;display:flex;flex-direction:column;gap:10px">
-            <div style="display:flex;align-items:center;gap:8px">
-              <div style="{{ fp1 }}"></div>
-              <div style="{{ fp2 }}"></div>
-              <div style="{{ fp3 }}"></div>
-              <span style="font:700 12px 'Space Grotesk',sans-serif;color:#04142f;white-space:nowrap;margin-left:4px">{{ flavorCountLabel }}</span>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:8px;background:#f0f3fb;border-radius:12px;padding:10px">
-              <sc-for list="{{ flavorRows }}" as="fr" hint-placeholder-count="4">
-                <sc-if value="{{ fr.hasQty }}" hint-placeholder-val="{{ false }}">
-                  <div style="position:relative;background:#fff;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:12px">
-                    <sc-if value="{{ fr.hasBadge }}" hint-placeholder-val="{{ false }}">
-                      <div style="position:absolute;top:0;right:10px;background:#fceb2e;color:#04142f;font:700 8px 'Space Grotesk',sans-serif;padding:2px 7px;border-radius:0 0 6px 6px;letter-spacing:.3px;text-transform:uppercase">{{ fr.badge }}</div>
-                    </sc-if>
-                    <div style="width:48px;height:48px;flex:none;border-radius:8px;overflow:hidden;background:#f0f3fb"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
-                    <div style="flex:1;font:700 14px 'Space Grotesk',sans-serif;color:#04142f">{{ fr.name }}</div>
-                    <div style="display:flex;align-items:center;background:#04142f;border-radius:8px;overflow:hidden;flex:none">
-                      <div onClick="{{ fr.onDecrease }}" style="padding:8px 13px;color:#fff;font:700 18px 'Space Grotesk',sans-serif;cursor:pointer;user-select:none;line-height:1">−</div>
-                      <div style="padding:0 4px;color:#fff;font:700 14px 'Space Grotesk',sans-serif;min-width:22px;text-align:center">{{ fr.qty }}</div>
-                      <div onClick="{{ fr.onIncrease }}" style="{{ fr.plusStyle }}">+</div>
-                    </div>
+      <sc-if value="{{ stage1 }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:10px;animation:slideInRight .45s ease-out">
+          <div style="text-align:right;font:700 12px 'Space Grotesk',sans-serif;color:#04142f">{{ flavorCountLabel }}</div>
+          <div style="display:flex;flex-direction:column;gap:8px;background:#f0f3fb;border-radius:12px;padding:10px">
+            <sc-for list="{{ flavorRows }}" as="fr" hint-placeholder-count="4">
+              <sc-if value="{{ fr.hasQty }}" hint-placeholder-val="{{ false }}">
+                <div style="position:relative;background:#fff;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:12px">
+                  <sc-if value="{{ fr.hasBadge }}" hint-placeholder-val="{{ false }}">
+                    <div style="position:absolute;top:0;right:10px;background:#fceb2e;color:#04142f;font:700 8px 'Space Grotesk',sans-serif;padding:2px 7px;border-radius:0 0 6px 6px;letter-spacing:.3px;text-transform:uppercase">{{ fr.badge }}</div>
+                  </sc-if>
+                  <div style="width:48px;height:48px;flex:none;border-radius:8px;overflow:hidden;background:#f0f3fb"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
+                  <div style="flex:1;font:700 14px 'Space Grotesk',sans-serif;color:#04142f">{{ fr.name }}</div>
+                  <div style="display:flex;align-items:center;background:#04142f;border-radius:8px;overflow:hidden;flex:none">
+                    <div onClick="{{ fr.onDecrease }}" style="padding:8px 13px;color:#fff;font:700 18px 'Space Grotesk',sans-serif;cursor:pointer;user-select:none;line-height:1">−</div>
+                    <div style="padding:0 4px;color:#fff;font:700 14px 'Space Grotesk',sans-serif;min-width:22px;text-align:center">{{ fr.qty }}</div>
+                    <div onClick="{{ fr.onIncrease }}" style="{{ fr.plusStyle }}">+</div>
                   </div>
-                </sc-if>
-                <sc-if value="{{ fr.noQty }}" hint-placeholder-val="{{ true }}">
-                  <div onClick="{{ fr.onIncrease }}" style="position:relative;background:#fff;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:12px;cursor:pointer">
-                    <sc-if value="{{ fr.hasBadge }}" hint-placeholder-val="{{ false }}">
-                      <div style="position:absolute;top:0;right:10px;background:#fceb2e;color:#04142f;font:700 8px 'Space Grotesk',sans-serif;padding:2px 7px;border-radius:0 0 6px 6px;letter-spacing:.3px;text-transform:uppercase">{{ fr.badge }}</div>
-                    </sc-if>
-                    <div style="width:48px;height:48px;flex:none;border-radius:8px;overflow:hidden;background:#f0f3fb"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
-                    <div style="flex:1;font:700 14px 'Space Grotesk',sans-serif;color:#04142f">{{ fr.name }}</div>
-                    <div style="{{ fr.addBtnStyle }}">ADICIONAR +</div>
-                  </div>
-                </sc-if>
-              </sc-for>
-            </div>
-            <div style="border:2px solid #04142f;border-radius:10px;background:#f0f3fb;padding:14px;display:flex;align-items:center;gap:12px">
-              <div style="flex:1;font:600 12px/1.4 'Inter Italic','Space Grotesk',sans-serif;color:#04142f">Você já desbloqueou: 4º Pouch, Mouse Pad, Apoio de Teclado, Bloco de Anotações e Frete Grátis</div>
-              <div style="width:60px;height:60px;flex:none;background:#dbe3f2;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img key="{{ freebieImgKey }}" src="{{ currentPrizeImg }}" alt="Prêmios DOT" style="width:100%;height:100%;object-fit:contain;animation:prizePop .6s cubic-bezier(.22,1,.36,1)"></div>
-            </div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ fr.noQty }}" hint-placeholder-val="{{ true }}">
+                <div onClick="{{ fr.onIncrease }}" style="position:relative;background:#fff;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:12px;cursor:pointer">
+                  <sc-if value="{{ fr.hasBadge }}" hint-placeholder-val="{{ false }}">
+                    <div style="position:absolute;top:0;right:10px;background:#fceb2e;color:#04142f;font:700 8px 'Space Grotesk',sans-serif;padding:2px 7px;border-radius:0 0 6px 6px;letter-spacing:.3px;text-transform:uppercase">{{ fr.badge }}</div>
+                  </sc-if>
+                  <div style="width:48px;height:48px;flex:none;border-radius:8px;overflow:hidden;background:#f0f3fb"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
+                  <div style="flex:1;font:700 14px 'Space Grotesk',sans-serif;color:#04142f">{{ fr.name }}</div>
+                  <div style="{{ fr.addBtnStyle }}">ADICIONAR +</div>
+                </div>
+              </sc-if>
+            </sc-for>
           </div>
-
-          <!-- PAINEL 2: Sabor grátis -->
-          <div style="width:33.3333%;flex:none;box-sizing:border-box;padding-left:16px;display:flex;flex-direction:column;gap:10px">
-            <div onClick="{{ backToFlavors }}" style="align-self:flex-start;font:500 12px 'Space Grotesk',sans-serif;color:rgba(4,20,47,.4);cursor:pointer" style-hover="color:#04142f">← Voltar</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start">
-              <sc-for list="{{ freeFlavorRows }}" as="fr" hint-placeholder-count="4">
-                <sc-if value="{{ fr.selected }}" hint-placeholder-val="{{ false }}">
-                  <div onClick="{{ fr.onSelect }}" style="position:relative;border-radius:12px;border:2px solid #fceb2e;background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer">
-                    <div style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#fceb2e;border:2px solid #04142f;display:flex;align-items:center;justify-content:center"><div style="width:6px;height:4px;border-left:1.5px solid #04142f;border-bottom:1.5px solid #04142f;transform:rotate(-45deg) translate(0.5px,-0.5px)"></div></div>
-                    <div style="width:100%;aspect-ratio:1;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
-                    <div style="font:700 12px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f;text-align:center">{{ fr.name }}</div>
-                  </div>
-                </sc-if>
-                <sc-if value="{{ fr.unselected }}" hint-placeholder-val="{{ true }}">
-                  <div onClick="{{ fr.onSelect }}" style="border-radius:12px;border:1px solid rgba(4,20,47,.15);background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer" style-hover="border-color:#fceb2e">
-                    <div style="width:100%;aspect-ratio:1;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
-                    <div style="font:700 12px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f;text-align:center">{{ fr.name }}</div>
-                  </div>
-                </sc-if>
-              </sc-for>
-            </div>
-            <div style="border:2px solid #04142f;border-radius:10px;background:#f0f3fb;padding:14px;display:flex;align-items:center;gap:12px">
-              <div style="flex:1;font:600 12px/1.4 'Inter Italic','Space Grotesk',sans-serif;color:#04142f">Você já desbloqueou: 4º Pouch, Mouse Pad, Apoio de Teclado, Bloco de Anotações e Frete Grátis</div>
-              <div style="width:60px;height:60px;flex:none;background:#dbe3f2;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img key="{{ freebieImgKey }}" src="{{ currentPrizeImg }}" alt="Prêmios DOT" style="width:100%;height:100%;object-fit:contain;animation:prizePop .6s cubic-bezier(.22,1,.36,1)"></div>
-            </div>
+          <div style="border:2px solid #04142f;border-radius:10px;background:#f0f3fb;padding:14px;display:flex;align-items:center;gap:12px">
+            <div style="flex:1;font:600 12px/1.4 'Inter Italic','Space Grotesk',sans-serif;color:#04142f">Você já desbloqueou: 4º Pouch, Mouse Pad, Apoio de Teclado, Bloco de Anotações e Frete Grátis</div>
+            <div style="width:60px;height:60px;flex:none;background:#dbe3f2;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img key="{{ freebieImgKey }}" src="{{ currentPrizeImg }}" alt="Prêmios DOT" style="width:100%;height:100%;object-fit:contain;animation:prizePop .6s cubic-bezier(.22,1,.36,1)"></div>
           </div>
-
-          <!-- PAINEL 3: Brindes desbloqueados -->
-          <div style="width:33.3333%;flex:none;box-sizing:border-box;padding-left:16px;display:flex;flex-direction:column;gap:12px">
-            <div style="border-radius:14px;background:linear-gradient(rgba(4,20,47,.6),rgba(4,20,47,.6)),url('./assets/textura-navy.png') center/cover;padding:12px;display:flex;flex-direction:column;gap:8px">
-              <div style="font:600 10px 'Inter Italic','Space Grotesk',sans-serif;color:rgba(252,235,46,.8);padding:0 1px">DESBLOQUEADOS</div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-                <sc-for list="{{ freebieList }}" as="fb" hint-placeholder-count="4">
-                  <div style="position:relative;border-radius:12px;border:2px solid #fceb2e;background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px">
-                    <div style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#fceb2e;border:2px solid #04142f;display:flex;align-items:center;justify-content:center"><div style="width:6px;height:4px;border-left:1.5px solid #04142f;border-bottom:1.5px solid #04142f;transform:rotate(-45deg) translate(0.5px,-0.5px)"></div></div>
-                    <div style="width:100%;aspect-ratio:1;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fb.img }}" alt="{{ fb.label }}" style="{{ fb.imgStyle }}"></div>
-                    <div style="font:700 10.5px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f;text-align:center;line-height:1.15">{{ fb.label }}</div>
-                  </div>
-                </sc-for>
-              </div>
-            </div>
-            <div onClick="{{ resgatar }}" style="background:#fceb2e;color:#04142f;text-align:center;padding:17px;border-radius:10px;font:700 16px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">FINALIZAR COMPRA <span style="font-size:20px;vertical-align:middle">→</span></div>
-          </div>
-
         </div>
-      </div>
+      </sc-if>
+
+      <sc-if value="{{ stage2 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:10px;animation:slideInRight .45s ease-out">
+          <div onClick="{{ backToFlavors }}" style="align-self:flex-start;font:500 12px 'Space Grotesk',sans-serif;color:rgba(4,20,47,.4);cursor:pointer" style-hover="color:#04142f">← Voltar</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start">
+            <sc-for list="{{ freeFlavorRows }}" as="fr" hint-placeholder-count="4">
+              <sc-if value="{{ fr.selected }}" hint-placeholder-val="{{ false }}">
+                <div onClick="{{ fr.onSelect }}" style="position:relative;border-radius:12px;border:2px solid #fceb2e;background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer">
+                  <div style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#fceb2e;border:2px solid #04142f;display:flex;align-items:center;justify-content:center"><div style="width:6px;height:4px;border-left:1.5px solid #04142f;border-bottom:1.5px solid #04142f;transform:rotate(-45deg) translate(0.5px,-0.5px)"></div></div>
+                  <div style="width:100%;aspect-ratio:1;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
+                  <div style="font:700 12px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f;text-align:center">{{ fr.name }}</div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ fr.unselected }}" hint-placeholder-val="{{ true }}">
+                <div onClick="{{ fr.onSelect }}" style="border-radius:12px;border:1px solid rgba(4,20,47,.15);background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer" style-hover="border-color:#fceb2e">
+                  <div style="width:100%;aspect-ratio:1;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
+                  <div style="font:700 12px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f;text-align:center">{{ fr.name }}</div>
+                </div>
+              </sc-if>
+            </sc-for>
+          </div>
+          <div style="border:2px solid #04142f;border-radius:10px;background:#f0f3fb;padding:14px;display:flex;align-items:center;gap:12px">
+            <div style="flex:1;font:600 12px/1.4 'Inter Italic','Space Grotesk',sans-serif;color:#04142f">Você já desbloqueou: 4º Pouch, Mouse Pad, Apoio de Teclado, Bloco de Anotações e Frete Grátis</div>
+            <div style="width:60px;height:60px;flex:none;background:#dbe3f2;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img key="{{ freebieImgKey }}" src="{{ currentPrizeImg }}" alt="Prêmios DOT" style="width:100%;height:100%;object-fit:contain;animation:prizePop .6s cubic-bezier(.22,1,.36,1)"></div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ stage3 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:12px;animation:slideInRight .45s ease-out">
+          <div style="border-radius:14px;background:linear-gradient(rgba(4,20,47,.6),rgba(4,20,47,.6)),url('./assets/textura-navy.png') center/cover;padding:12px;display:flex;flex-direction:column;gap:8px">
+            <div style="font:600 10px 'Inter Italic','Space Grotesk',sans-serif;color:rgba(252,235,46,.8);padding:0 1px">DESBLOQUEADOS</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <sc-for list="{{ freebieList }}" as="fb" hint-placeholder-count="4">
+                <div style="position:relative;border-radius:12px;border:2px solid #fceb2e;background:#fff;padding:6px;display:flex;flex-direction:column;align-items:center;gap:5px">
+                  <div style="position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#fceb2e;border:2px solid #04142f;display:flex;align-items:center;justify-content:center"><div style="width:6px;height:4px;border-left:1.5px solid #04142f;border-bottom:1.5px solid #04142f;transform:rotate(-45deg) translate(0.5px,-0.5px)"></div></div>
+                  <div style="width:100%;aspect-ratio:1;background:#f0f3fb;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img src="{{ fb.img }}" alt="{{ fb.label }}" style="{{ fb.imgStyle }}"></div>
+                  <div style="font:700 10.5px 'Inter Italic','Space Grotesk',sans-serif;color:#04142f;text-align:center;line-height:1.15">{{ fb.label }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div onClick="{{ resgatar }}" style="background:#fceb2e;color:#04142f;text-align:center;padding:17px;border-radius:10px;font:700 16px 'Inter Italic','Space Grotesk',sans-serif;cursor:pointer" style-hover="background:#0d2040">FINALIZAR COMPRA <span style="font-size:20px;vertical-align:middle">→</span></div>
+        </div>
+      </sc-if>
     </div>
   </sc-if>
 
@@ -415,15 +409,13 @@ class Component extends DCLogic {
     ];
     const currentPrizeImg = PRIZE_IMGS[carouselTick % PRIZE_IMGS.length];
 
-    const stageOffset = -(naturalStage - 1) * (100 / 3);
-    const fp = (n) => `flex:1;height:4px;border-radius:2px;background:${totalQty >= n ? '#1f9d55' : 'rgba(4,20,47,.15)'}`;
-
     return {
       sheetOpen,
       currentPrizeImg,
       freebieImgKey: carouselTick,
-      stageOffset,
-      fp1: fp(1), fp2: fp(2), fp3: fp(3),
+      stage1: naturalStage === 1 && !resgatado,
+      stage2: naturalStage === 2 && !resgatado,
+      stage3: naturalStage === 3 && !resgatado,
       flavorCountLabel: `${totalQty}/3 sabores`,
       openSheet: this.openSheet,
       closeSheet: this.closeSheet,
