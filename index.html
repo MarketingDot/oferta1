@@ -197,28 +197,35 @@ a:hover{color:#0f2d72}
       <sc-if value="{{ stage1 }}" hint-placeholder-val="{{ true }}">
         <div style="display:flex;flex-direction:column;gap:8px;background:#f0f3fb;border-radius:12px;padding:10px">
           <sc-for list="{{ flavorRows }}" as="fr" hint-placeholder-count="4">
-            <div style="position:relative;background:#fff;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:12px">
-              <sc-if value="{{ fr.hasBadge }}" hint-placeholder-val="{{ false }}">
-                <div style="position:absolute;top:0;right:10px;background:#fceb2e;color:#04142f;font:700 8px 'Space Grotesk',sans-serif;padding:2px 7px;border-radius:0 0 6px 6px;letter-spacing:.3px;text-transform:uppercase">{{ fr.badge }}</div>
-              </sc-if>
-              <div style="width:48px;height:48px;flex:none;border-radius:8px;overflow:hidden;background:#f0f3fb"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:contain"></div>
-              <div style="flex:1;font:700 14px 'Space Grotesk',sans-serif;color:#04142f">{{ fr.name }}</div>
-              <sc-if value="{{ fr.hasQty }}" hint-placeholder-val="{{ false }}">
+            <sc-if value="{{ fr.hasQty }}" hint-placeholder-val="{{ false }}">
+              <div style="position:relative;background:#fff;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:12px">
+                <sc-if value="{{ fr.hasBadge }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute;top:0;right:10px;background:#fceb2e;color:#04142f;font:700 8px 'Space Grotesk',sans-serif;padding:2px 7px;border-radius:0 0 6px 6px;letter-spacing:.3px;text-transform:uppercase">{{ fr.badge }}</div>
+                </sc-if>
+                <div style="width:48px;height:48px;flex:none;border-radius:8px;overflow:hidden;background:#f0f3fb"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
+                <div style="flex:1;font:700 14px 'Space Grotesk',sans-serif;color:#04142f">{{ fr.name }}</div>
                 <div style="display:flex;align-items:center;background:#04142f;border-radius:8px;overflow:hidden;flex:none">
                   <div onClick="{{ fr.onDecrease }}" style="padding:8px 13px;color:#fff;font:700 18px 'Space Grotesk',sans-serif;cursor:pointer;user-select:none;line-height:1">−</div>
                   <div style="padding:0 4px;color:#fff;font:700 14px 'Space Grotesk',sans-serif;min-width:22px;text-align:center">{{ fr.qty }}</div>
                   <div onClick="{{ fr.onIncrease }}" style="{{ fr.plusStyle }}">+</div>
                 </div>
-              </sc-if>
-              <sc-if value="{{ fr.noQty }}" hint-placeholder-val="{{ true }}">
-                <div onClick="{{ fr.onIncrease }}" style="{{ fr.addBtnStyle }}">ADICIONAR +</div>
-              </sc-if>
-            </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ fr.noQty }}" hint-placeholder-val="{{ true }}">
+              <div onClick="{{ fr.onIncrease }}" style="position:relative;background:#fff;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:12px;cursor:pointer">
+                <sc-if value="{{ fr.hasBadge }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute;top:0;right:10px;background:#fceb2e;color:#04142f;font:700 8px 'Space Grotesk',sans-serif;padding:2px 7px;border-radius:0 0 6px 6px;letter-spacing:.3px;text-transform:uppercase">{{ fr.badge }}</div>
+                </sc-if>
+                <div style="width:48px;height:48px;flex:none;border-radius:8px;overflow:hidden;background:#f0f3fb"><img src="{{ fr.img }}" alt="{{ fr.name }}" style="width:100%;height:100%;object-fit:cover"></div>
+                <div style="flex:1;font:700 14px 'Space Grotesk',sans-serif;color:#04142f">{{ fr.name }}</div>
+                <div style="{{ fr.addBtnStyle }}">ADICIONAR +</div>
+              </div>
+            </sc-if>
           </sc-for>
         </div>
-        <div style="margin-top:10px">
-          <div style="text-align:center;font:600 11px 'Space Grotesk',sans-serif;color:rgba(4,20,47,.5);margin-bottom:8px;letter-spacing:.3px">{{ selectionLabel }}</div>
-          <div onClick="{{ goToFreeStep }}" style="{{ continuarStyle }}">CONTINUAR <span style="font-size:18px;vertical-align:middle">→</span></div>
+        <div style="margin-top:10px;border:2px solid #04142f;border-radius:10px;background:#f0f3fb;padding:14px;display:flex;align-items:center;gap:12px">
+          <div style="flex:1;font:600 12px/1.4 'Inter Italic','Space Grotesk',sans-serif;color:#04142f">Você já desbloqueou: 4º Pouch, Mouse Pad, Apoio de Teclado, Bloco de Anotações e Frete Grátis</div>
+          <div style="width:60px;height:60px;flex:none;background:#dbe3f2;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img key="{{ freebieImgKey }}" src="{{ currentPrizeImg }}" alt="Prêmios DOT" style="width:100%;height:100%;object-fit:contain;animation:prizePop .6s cubic-bezier(.22,1,.36,1)"></div>
         </div>
       </sc-if>
 
@@ -240,6 +247,10 @@ a:hover{color:#0f2d72}
               </div>
             </sc-if>
           </sc-for>
+        </div>
+        <div style="margin-top:10px;border:2px solid #04142f;border-radius:10px;background:#f0f3fb;padding:14px;display:flex;align-items:center;gap:12px">
+          <div style="flex:1;font:600 12px/1.4 'Inter Italic','Space Grotesk',sans-serif;color:#04142f">Você já desbloqueou: 4º Pouch, Mouse Pad, Apoio de Teclado, Bloco de Anotações e Frete Grátis</div>
+          <div style="width:60px;height:60px;flex:none;background:#dbe3f2;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><img key="{{ freebieImgKey }}" src="{{ currentPrizeImg }}" alt="Prêmios DOT" style="width:100%;height:100%;object-fit:contain;animation:prizePop .6s cubic-bezier(.22,1,.36,1)"></div>
         </div>
       </sc-if>
 
@@ -295,10 +306,12 @@ class Component extends DCLogic {
     addedToCart: false,
     openFaq: {},
     promoOpen: false,
+    carouselTick: 0,
     stickyVisible: true,
   };
 
   componentDidMount() {
+    this._prizeInterval = setInterval(() => this.setState(s => ({ carouselTick: s.carouselTick + 1 })), 2600);
     this._observer = new IntersectionObserver(([e]) => {
       this.setState({ stickyVisible: !e.isIntersecting });
     }, { threshold: 0 });
@@ -306,6 +319,7 @@ class Component extends DCLogic {
     if (bottomCta) this._observer.observe(bottomCta);
   }
   componentWillUnmount() {
+    clearInterval(this._prizeInterval);
     if (this._observer) this._observer.disconnect();
   }
 
@@ -314,15 +328,14 @@ class Component extends DCLogic {
   increaseQty = (key) => this.setState(s => {
     const total = Object.values(s.quantities).reduce((a, b) => a + b, 0);
     if (total >= 3) return {};
-    return { quantities: { ...s.quantities, [key]: s.quantities[key] + 1 } };
+    const newQty = { ...s.quantities, [key]: s.quantities[key] + 1 };
+    const newTotal = Object.values(newQty).reduce((a, b) => a + b, 0);
+    return { quantities: newQty, confirmedPaid: newTotal === 3 };
   });
   decreaseQty = (key) => this.setState(s => ({
-    quantities: { ...s.quantities, [key]: Math.max(0, s.quantities[key] - 1) }
+    quantities: { ...s.quantities, [key]: Math.max(0, s.quantities[key] - 1) },
+    confirmedPaid: false,
   }));
-  goToFreeStep = () => {
-    const total = Object.values(this.state.quantities).reduce((a, b) => a + b, 0);
-    if (total === 3) this.setState({ confirmedPaid: true });
-  };
   backToFlavors = () => this.setState({ confirmedPaid: false });
   selectFree = (name) => this.setState({ pickFree: name });
   resgatar = () => {
@@ -337,7 +350,7 @@ class Component extends DCLogic {
   togglePromo = () => this.setState(s => ({ promoOpen: !s.promoOpen }));
 
   renderVals() {
-    const { sheetOpen, quantities, pickFree, confirmedPaid, resgatado, addedToCart, openFaq, promoOpen, stickyVisible } = this.state;
+    const { sheetOpen, quantities, pickFree, confirmedPaid, resgatado, addedToCart, openFaq, promoOpen, carouselTick, stickyVisible } = this.state;
     const totalQty = Object.values(quantities).reduce((a, b) => a + b, 0);
     const naturalStage = !confirmedPaid ? 1 : pickFree == null ? 2 : 3;
 
@@ -378,11 +391,19 @@ class Component extends DCLogic {
     ];
     const freebieList = FREEBIE_DEFS.map(d => ({ label: d.label, img: d.img, imgStyle: d.imgStyle }));
 
-    const selectionLabel = totalQty === 0 ? 'Selecione 3 sabores' : totalQty === 3 ? '✓ 3/3 sabores selecionados' : `${totalQty}/3 sabores selecionados`;
-    const continuarStyle = `background:${totalQty === 3 ? '#fceb2e' : 'rgba(4,20,47,.1)'};color:${totalQty === 3 ? '#04142f' : 'rgba(4,20,47,.3)'};text-align:center;padding:16px;border-radius:10px;font:700 16px 'Inter Italic','Space Grotesk',sans-serif;${totalQty === 3 ? 'cursor:pointer' : 'cursor:not-allowed'}`;
+    const PRIZE_IMGS = [
+      './assets/pouch-melancia.png',
+      './assets/mousepad-dot.png',
+      './assets/apoio-teclado.png',
+      './assets/bloco-anotacoes.png',
+      './assets/frete-gratis.png',
+    ];
+    const currentPrizeImg = PRIZE_IMGS[carouselTick % PRIZE_IMGS.length];
 
     return {
       sheetOpen,
+      currentPrizeImg,
+      freebieImgKey: carouselTick,
       openSheet: this.openSheet,
       closeSheet: this.closeSheet,
       resgatar: this.resgatar,
@@ -398,9 +419,6 @@ class Component extends DCLogic {
       flavorRows,
       freeFlavorRows,
       freebieList,
-      selectionLabel,
-      continuarStyle,
-      goToFreeStep: this.goToFreeStep,
       backToFlavors: this.backToFlavors,
       marqueeItems: [
         { text: 'OFERTA TERMINA EM 14 DIAS' },
